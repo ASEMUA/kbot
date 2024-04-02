@@ -46,8 +46,10 @@ to quickly create a Cobra application.`,
 			payload := m.Message().Payload
 			
 			switch payload {
-			case "hello":
+			  case "hello":
 				err = m.Send(fmt.Sprintf("Hello I`m Kbot %s", appVersion))
+			  case "date":
+				err = m.Send(fmt.Sprintf("Hello! Today is: %s", time.Now()))
 			}
 			return err
 		})
