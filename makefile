@@ -1,7 +1,7 @@
 APP=$(shell basename $(shell git remote get-url origin))
 REGESTRY=asemua
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETOS=linux
+TARGETOS=linux #linux darwin windows
 TARGETARCH=amd64
 
 format: 
@@ -16,6 +16,22 @@ lint:
 test: 
 	go test -v
 
+linux:
+	TARGETOS=linux
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+
+windows:
+	TARGETOS=windows
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+
+darwin:
+	TARGETOS=darwin
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+
+arm:
+	TARGETOS=arm
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+
 build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
@@ -27,3 +43,4 @@ push:
 
 clean: 
 	rm -rf kbot
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
