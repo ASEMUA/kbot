@@ -1,8 +1,13 @@
 APP=$(shell basename $(shell git remote get-url origin))
 REGESTRY=asemua
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETOS=linux #linux darwin windows
 TARGETARCH=amd64
+linux: TARGETOS=linux 
+windows: TARGETOS=windows 
+darwin: TARGETOS=darwin
+android: TARGETOS=android
+
+
 
 format: 
 	gofmt -s -w ./
@@ -17,16 +22,16 @@ test:
 	go test -v
 
 linux: format get
-	GO_ENABLED=0 GOOS=linux GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
 windows: format get
-	GO_ENABLED=0 GOOS=windows GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
 darwin: format get
-	GO_ENABLED=0 GOOS=darwin GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
-arm: format get
-	GO_ENABLED=0 GOOS=arm GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
+android: format get
+	GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=arm go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
 build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
