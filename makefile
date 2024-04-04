@@ -1,7 +1,7 @@
 APP=$(shell basename $(shell git remote get-url origin))
 REGESTRY=asemua
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETOS=linux #linux darwin windows
+#TARGETOS=linux #linux darwin windows
 TARGETARCH=amd64
 
 format: 
@@ -16,16 +16,16 @@ lint:
 test: 
 	go test -v
 
-linux:
+linux: format get
 	GO_ENABLED=0 GOOS=linux GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
-windows:
+windows: format get
 	TARGETOS=windows GO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
-darwin:
+darwin: format get
 	GO_ENABLED=0 GOOS=darwin GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
-arm:
+arm: format get
 	GO_ENABLED=0 GOOS=arm GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
 build: format get
