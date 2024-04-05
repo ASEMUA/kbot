@@ -37,7 +37,7 @@ build: format get
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o kbot -ldflags "-X="github.com/ASEMUA/kbot/cmd.appVersion=${VERSION}
 
 image:
-	docker build . -t ${REGESTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker build . -t ${REGESTRY}/${APP}:${VERSION}-${TARGETARCH} --build-arg TARGETARCH=${TARGETARCH}
 
 push:
 	docker push ${REGESTRY}/${APP}:${VERSION}-${TARGETARCH}
