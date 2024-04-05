@@ -6,6 +6,8 @@ linux: TARGETOS=linux
 windows: TARGETOS=windows 
 darwin: TARGETOS=darwin
 android: TARGETOS=android
+build: TARGETOS=linux
+
 
 format: 
 	gofmt -s -w ./
