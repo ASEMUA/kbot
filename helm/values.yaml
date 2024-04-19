@@ -8,6 +8,7 @@ image:
   repository: asemua
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.1.0-2dab8dc"
+  arch: amd64
 
 secret:
   name: "kbot"
