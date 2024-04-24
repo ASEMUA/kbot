@@ -2,12 +2,22 @@
 name: KBOT-CICD
 
 # Визначимо подію, яка запустить виконання workflow процесу.
-on: push
+on: 
+  push:
+    branches:
+      - develop
+env:
+  TARGETOS: linux
+  TARGETARCH: amd64
+
 # блок задач який налаштовано на запуск завдання на новій ВМ з останньою версією ubuntu
 jobs:
   ci:
     name: CI
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 # перший крок задачі дозволить запускати на ранері репозиторій із скриптами для виконання дії. 
     steps:
       - name: Checkout
@@ -43,7 +53,7 @@ jobs:
 
     - uses: mikefarah/yq@master
       with:
-        cmd: yq -i '.image.tag=strenv(VERSION) | .image.os=strenv(RUNNER_OS)' helm/values.yaml
+        cmd: yq -i '.image.tag=strenv(VERSION) | .image.os=strenv(TARGETOS) | .image.arch=strenv(TARGETARCH)' helm/values.yaml
     
     - run: |
         git config user.name github-actions
