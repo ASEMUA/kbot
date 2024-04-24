@@ -24,6 +24,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build&Push
+        permissions:
+          contents: read
+          packages: write
         env:
           APP: "kbot"
           REGISTRY: ${{ vars.DOCKERHUB_USERNAME }}
