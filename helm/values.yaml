@@ -6,10 +6,10 @@ replicaCount: 1
 image:
   repository: asemua
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.3.0-c4b295e"
+  tag: "v1.3.0-701ed05"
   arch: ""
   parameter: go
-  os: linux
+  os: ""
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
