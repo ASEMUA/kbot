@@ -6,10 +6,10 @@ replicaCount: 1
 image:
   repository: asemua/kbot
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.3.0-c04057c"
-  arch: ""
+  tag: "v1.3.0-ba99d7d"
+  arch: "X64"
   parameter: go
-  os: ""
+  os: "Linux"
   pullPolicy: IfNotPresent
 secret:
   name: "kbot"
