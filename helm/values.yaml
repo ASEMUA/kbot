@@ -4,12 +4,13 @@
 
 replicaCount: 1
 image:
-  repository: asemua
+  repository: asemua/kbot
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.3.0-701ed05"
-  arch: ""
+  arch: "amd64"
   parameter: go
-  os: ""
+  os: "linux"
+  pullPolicy: IfNotPresent
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
@@ -33,7 +34,8 @@ podLabels: {}
 podSecurityContext: {}
 # fsGroup: 2000
 
-securityContext: {}
+securityContext: 
+  privileged: true
 # capabilities:
 #   drop:
 #   - ALL
