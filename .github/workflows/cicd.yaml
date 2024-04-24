@@ -27,6 +27,7 @@ jobs:
         env:
           APP: "kbot"
           REGISTRY: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.TOKEN_FULL }}
         run: make image push
   cd:
     name: CD
