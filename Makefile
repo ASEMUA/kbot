@@ -1,5 +1,5 @@
 APP=$(shell basename $(shell git remote get-url origin))
-REGESTRY := ghcr.io/ASEMUA
+REGESTRY := ghcr.io/kbot
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETARCH=amd64
 linux: TARGETOS=linux 
