@@ -7,7 +7,7 @@ image:
   repository: asemua/kbot
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.3.0-ee8fe5e"
-  arch: "X64"
+  arch: "amd64"
   parameter: go
   os: "Linux"
   pullPolicy: IfNotPresent
