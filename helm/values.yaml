@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: asemua/kbot
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.3.0-2eb8d95"
+  tag: "v1.3.0-c04057c"
   arch: ""
   parameter: go
   os: ""
