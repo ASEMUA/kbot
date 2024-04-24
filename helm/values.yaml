@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: asemua
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.2.0-4e38928"
+  tag: "v1.3.0-d35608d"
   arch: amd64
   parameter: go
 secret:
