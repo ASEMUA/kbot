@@ -6,7 +6,7 @@ replicaCount: 1
 image:
   repository: asemua
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "git_hook-c5f11ef"
+  tag: "git_hook-7010fbb"
   arch: amd64
 secret:
   name: "kbot"
